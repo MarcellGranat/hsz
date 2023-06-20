@@ -1,0 +1,23 @@
+title: Template for Financial and Economic Review
+author: Marcell Granat
+version: 0.1.0
+contributes:
+  formats:
+    common:
+      knitr:
+        opts_chunk:
+          echo: false
+    docx:
+        keep-md: false
+        fig-format: svg
+        fig-width: 6
+        # Use a CSL file to style (https://www.zotero.org/styles/)
+        csl: https://www.zotero.org/styles/journal-of-institutional-and-theoretical-economics
+reference-doc: _extensions/hsz/custom-reference-doc.docx
+language: _extensions/hsz/custom.yml
+execute: 
+  fig-dpi: 600
+  cache: true
+  echo: false
+  warning: false
+  error: true
