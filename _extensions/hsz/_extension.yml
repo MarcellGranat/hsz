@@ -8,16 +8,34 @@ contributes:
         opts_chunk:
           echo: false
     docx:
+        csl: hsz.csl
         keep-md: false
         fig-format: svg
         fig-width: 6
         # Use a CSL file to style (https://www.zotero.org/styles/)
-        csl: https://www.zotero.org/styles/journal-of-institutional-and-theoretical-economics
-reference-doc: _extensions/hsz/custom-reference-doc.docx
-language: _extensions/hsz/custom.yml
-execute: 
-  fig-dpi: 600
-  cache: true
-  echo: false
-  warning: false
-  error: true
+        reference-doc: custom-reference-doc.docx
+        language:
+          crossref-fig-title: "Ábra"
+          crossref-tbl-title: "Táblázat"
+          crossref-lst-title: "Kódlista"
+          crossref-thm-title: "Tétel"
+          crossref-lem-title: "Lemma"
+          crossref-cor-title: "Következmény"
+          crossref-prp-title: "Állítás"
+          crossref-cnj-title: "Feltevés"
+          crossref-def-title: "Definíció"
+          crossref-exm-title: "Példa"
+          crossref-exr-title: "Feladat"
+          crossref-ch-prefix: "Fejezet"
+          crossref-apx-prefix: "Melléklet"
+          crossref-sec-prefix: "Szakasz"
+          crossref-eq-prefix: "Egyenlet"
+          crossref-lof-title: "Ábrák jegyzéke"
+          crossref-lot-title: "Táblázatok jegyzéke"
+          crossref-lol-title: "Kódlisták jegyzéke"
+        execute: 
+          fig-dpi: 600
+          cache: true
+          echo: false
+          warning: false
+          error: true

@@ -1,53 +1,55 @@
-# Article Format Template (AFT)
+# Financial and Economic Review template
 
-<!-- REMOVE THIS IN YOUR FORMAT TEMPLATE -->
-> Template for creating a new journal article format for Quarto. 
->
-> This repository is a [Github Repository Template](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) that you should use as a starter to create a new extension format. Click on the "Use this template" button at the top !
->
-> See information about how-to use this repo template inside the template file or its rendered version at <https://quarto-journals.github.io/article-format-template/>
+Welcome to the Financial and Economic Review (Hitelintézeti Szemle, HSZ) Template Repository! This GitHub repository contains a ready-to-use template for preparing and submitting your papers to HSZ. The template is designed to make your submission process smooth and hassle-free.
 
-<!-- ALL THE BELOW SHOULD BE IN YOUR README -->
+The [output](https://github.com/MarcellGranat/hsz/blob/main/template.docx) from the demo [file](https://github.com/MarcellGranat/hsz/blob/main/template.qmd).
 
-This is a Quarto template that assists you in creating a manuscript for Article Format Template journals. You can learn more about ...
+This template enables you to use the simple markdown syntax. We prepared a minimalistic document with examples how to do that, but you can find further examples at <https://quarto.org/docs/output-formats/pdf-basics.html>.
 
-## Creating a New Article
+## How to start?
 
-You can use this as a template to create an article for an AFT journal. To do this, use the following command:
+1.  Install quarto in R
 
-```bash
-quarto use template quarto-journals/article-format-template
+```{r}
+install.packages("quarto")
 ```
 
-This will install the extension and create an example qmd file and bibiography that you can use as a starting place for your article.
+2.  Activate this template from the terminal. In Rstudio: open the terminal & type:
 
-## Installation For Existing Document
-
-You may also use this format with an existing Quarto project or document. From the quarto project or document directory, run the following command to install this format:
-
-```bash
-quarto install extension quarto-journals/article-format-template
+```         
+quarto install extension MarcellGranat/hsz
 ```
 
-## Usage
+3.  Open a new .qmd file (file \> new file \> Quarto Document)
 
-To use the format, you can use the format names `aft-pdf` and `aft-html`. For example:
+4.  Fill out the yaml as in the [template.qmd](https://github.com/MarcellGranat/hsz/blob/main/template.qmd)
 
-```bash
-quarto render article.qmd --to aft-pdf
+## What else?
+
+If you don't want to edit your work in Markdown, the following files in the `_extensions/hsz` folder may help you:
+
+```         
+├── custom-reference-doc.docx
 ```
 
-or in your document yaml
+A ready-to-use docx template file to use with quarto or pandoc.
 
-```yaml
-format:
-  pdf: default
-  aft-pdf:
-    keep-tex: true    
+```         
+├── hsz.csl
 ```
 
-You can view a preview of the rendered template at <https://quarto-journals.github.io/article-format-template/>.
+HSZ compatible bibliography style for Zotero (for Word plugin) and Latex.
 
-## Format Options
+```         
+├── template.qmd
+```
 
-This format does not have specific format option. Include documentation of such option otherwise. See <https://github.com/quarto-journals/elsevier#format-options> for an example.
+This template contains a full setup and example to plot in HSZ style in GGplot.
+
+<img src="template_files/figure-docx/fig-iris-1.svg" align="center" width="80%"/>
+
+# Limitations
+
+1.  Figure captions can not be located to the top. This is a [known issue](https://github.com/quarto-dev/quarto-cli/issues/2221) with docx format, so u have to replace it manually.
+
+2.  JEL codes after the abstarct will be separeted with alt + enter (default markdown `\`). This is something that migth be solved in future versions.
