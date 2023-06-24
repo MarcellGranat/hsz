@@ -2,78 +2,42 @@
 title: "Demo hsz format to use as template"
 format: hsz-docx
 abstract: |
-  Ez az absztrakt része. A tanulmányok és esszék minden esetben a főbb hipotéziseket és állításokat tartalmazó (kb. 800–1000 karakteres) összefoglalóval (absztrakt) kezdődnek. A szakmai cikkek esetében csak rövid (max 800 karakteres) absztraktot kérünk. Ebben tehát mindössze három dologra kell kitérni: mit vizsgálnak, milyen eszközökkel, módszerekkel, mi az eredmény.\
-  **Journal of Economic Literature (JEL) kódok:** C10, G20, G21 (lásd http://www.aeaweb.org/jel/jel_class_system.php)\
-  **Kulcsszavak:** első kulcsszó, második kulcsszó, harmadik kulcsszó, negyedik kulcsszó
+    Ez az absztrakt része. A tanulmányok és esszék minden esetben a főbb hipotéziseket és állításokat tartalmazó (kb. 800–1000 karakteres) összefoglalóval (absztrakt) kezdődnek. A szakmai cikkek esetében csak rövid (max 800 karakteres) absztraktot kérünk. Ebben tehát mindössze három dologra kell kitérni: mit vizsgálnak, milyen eszközökkel, módszerekkel, mi az eredmény.
+    
+    **Journal of Economic Literature (JEL) kódok:** C10, G20, G21
+    
+    **Kulcsszavak:** első kulcsszó, második kulcsszó, harmadik kulcsszó, negyedik kulcsszó
 bibliography: references.bib
+fig-align: center
+editor_options: 
+  chunk_output_type: console
 ---
+
+```{r setup}
+library(tidyverse)
+list.files(recursive = TRUE, full.names = TRUE, pattern = "template_fns.R$") |> 
+  source()
+```
 
 # Bevezetés
 
 A publikálásra szánt anyagokkal szemben támasztott elvárás a hibátlan nyelvhelyesség magyarul és angolul is. A tudományos publikációk általános logikai struktúra alapján épülnek fel. A hasonló felépítés nemcsak logikussá, érthetővé teszi a cikkeket, de a tájékozódást is meggyorsítja. A legtöbb tudományos publikáció a következő felépítést követi: Bevezetés/Szakirodalmi áttekintés, Módszertan, Eredmények, Megvitatás/Konklúzió. A tanulmányok átlagos terjedelme 1 ív (40 000 leütés szóközzel), ettől ± maximum 50 százalékkal lehet eltérni, míg az esszék átlagos terjedelme 35 000 leütés szóközzel, ettől ± maximum 20 százalékkal lehet eltérni. A szakmai cikkek javasolt terjedelme 14 000-24 000 karakter. Kérjük a szerzőinket, hogy az anyagok címe legyen rövid, tömör, kifejező és figyelemfelkeltő, és lehetőleg kerüljék a címben a kérdő formát! Kérjük, hogy egy tanulmányt vagy esszét legfeljebb négy szerző jegyezzen.
 
-A képleteket képletszerkesztővel kérjük elkészíteni. A képleteket jobb oldalon zárójelben, folyamatosan kérjük számozni (tehát az egyes alfejezetekben ne kezdődjön újra a számozás, mint az @eq-sample).
+A képleteket képletszerkesztővel kérjük elkészíteni. A képleteket jobb oldalon zárójelben, folyamatosan kérjük számozni (tehát az egyes alfejezetekben ne kezdődjön újra a számozás, mint az @eq-sample. egyenlet).
 
 $$
 i = \alpha + \beta r
 $$ {#eq-sample}
 
-```{r}
-
-library(tidyverse)
-library(extrafont)
-
-# * HSZ theme
-# font from: https://www.rmtweb.co.uk/calibri-and-cambria-fonts-for-mac
-hsz_theme <- theme_classic(base_family = "Calibri", base_size = 10) + 
-  theme(
-    text = element_text(family = "Calibri", colour = "black"),
-    plot.background = element_rect(fill = "#e4e4e3"),
-    panel.background = element_rect(fill = "#e4e4e3"),
-    axis.ticks.length=unit(.15, "cm"),
-    axis.ticks = element_line(linewidth = .8, color = "black"),
-    legend.position = "bottom",
-    legend.background = element_blank(),
-    plot.caption = element_text(size = 10, face = "italic", hjust = 0),
-    plot.caption.position = "plot",
-    panel.grid.major.y = element_line(linetype = "dotted", color = "#969898"),
-    axis.title = element_text(family = "Calibri", color = "black", size = 8),
-    axis.line = element_line(linewidth = .8, color = "black"),
-    strip.background = element_rect(fill = "#969898", linewidth = .8)
-  )
-
-hsz_theme_w_vertical <- hsz_theme + 
-  theme(
-    panel.grid.major.x = element_line(linetype = "dotted", color = "#969898"),
-  )
-
-theme_set(hsz_theme)
-
-# suggested colors for HSZ
-
-.co_pal <- tribble(
-  ~ hex_code, ~ name,
-  "#18223e", "blue",
-  "#6fa0be", "blue2", 
-  "#f8c567", "yellow",
-  "#b2242a", "red",
-  "#7aa140", "green",
-  "#da3232", "red2",
-  "#e57b2b", "orange",
-  "#787975", "grey", 
-  "#b9e1eb", "blue3"
-) |> 
-  pull(hex_code, name = name)
-
-.co <- \(x) set_names(.co_pal[x], NULL)
-
-update_geom_defaults("point", list(shape = 21, color = "black", size = 2))
-update_geom_defaults("line", list(size = 1.1, color = .co("blue")))
-```
+Az @fig-yes ábra.
 
 ```{r}
-#| label: fig-iris
-#| fig-cap: Egy minta ábra
+#| fig-cap: Egy minta ábra. Most ide Nulla duis esse fugiat quis amet ipsum dolor amet cupidatat ea qui aute consectetur aliqua consectetur.Nulla duis esse fugiat quis amet ipsum dolor amet cupidatat ea qui aute consectetur aliqua consectetur.
+#| fig-height: 6
+
+l1 <- knitr::opts_current$get()
+write_rds(l1, "test.rds")
+
 
 ggplot(iris) + 
   geom_point(aes(Sepal.Length, Sepal.Width, fill = Species)) + 
@@ -82,8 +46,21 @@ ggplot(iris) +
     subtitle = "Sepal.Width",
     y = NULL,
     caption = "Ez csak egy random magyarázat ide.\nForrás: saját szerkesztés."
-  )
+  ) -
+  .gg_finalise
 ```
+
+```{r}
+#| tbl-cap: "Minta táblázat"
+#| tbl-subcap: "Non cupidatat ut sint non est labore adipisicing aliqua labore consequat fugiat irure fugiat id. Amet exercitation pariatur proident incididunt velit id laborum anim ad duis mollit nisi enim eiusmod. Enim sint qui fugiat elit laborum mollit ipsum pariatur magna enim est. Incididunt nisi culpa est laborum in Lorem quis id sunt ad Lorem consequat."
+
+iris |> 
+  head(5) |> 
+  select(1:3) |> 
+  gt() |> 
+  .gt_finalise()
+```
+
 
 És egy minta hivatkozás [@CameronTrivedi2013]. 
 

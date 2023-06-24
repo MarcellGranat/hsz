@@ -46,7 +46,7 @@ HSZ compatible bibliography style for Zotero (for Word plugin) and Latex.
 
 This template contains a full setup and example to plot in HSZ style in GGplot.
 
-<img src="template_files/figure-docx/fig-iris-1.svg" align="center" width="80%"/>
+<img src="figures/unnamed-chunk-1.png" align="center" width="80%"/>
 
 # Limitations
 
