@@ -29,29 +29,28 @@ $$
 i = \alpha + \beta r
 $$ {#eq-sample}
 
-Az @fig-yes ábra.
-
 ```{r}
-#| fig-cap: Egy minta ábra. Most ide Nulla duis esse fugiat quis amet ipsum dolor amet cupidatat ea qui aute consectetur aliqua consectetur.Nulla duis esse fugiat quis amet ipsum dolor amet cupidatat ea qui aute consectetur aliqua consectetur.
-#| fig-height: 6
-
-l1 <- knitr::opts_current$get()
-write_rds(l1, "test.rds")
-
+#| cap: Egy minta ábra. Nulla occaecat exercitation in dolor consequat aliqua et.
+#| fig-subcap: "Nostrud qui laboris ad occaecat non non. Id mollit occaecat velit do ad id ad eu dolor ad veniam ipsum duis. Irure deserunt ad pariatur proident occaecat nisi aute cupidatat ea eiusmod laborum esse dolore ex nisi. Ullamco excepteur nulla officia occaecat ut do qui non pariatur. Irure anim nisi non dolore dolor qui pariatur. Forrás: Saját szerkesztés."
 
 ggplot(iris) + 
   geom_point(aes(Sepal.Length, Sepal.Width, fill = Species)) + 
-  scale_fill_manual(values = .co(c("red", "blue", "blue2"))) +
-  labs(
-    subtitle = "Sepal.Width",
-    y = NULL,
-    caption = "Ez csak egy random magyarázat ide.\nForrás: saját szerkesztés."
-  ) -
+  scale_fill_manual(values = .co(c("red", "blue", "blue2"))) -
   .gg_finalise
 ```
 
 ```{r}
-#| tbl-cap: "Minta táblázat"
+#| cap: Ugyanaz az ábra, de y a helyén hagyva.
+#| modify_y: false
+
+ggplot(iris) + 
+  geom_point(aes(Sepal.Length, Sepal.Width, fill = Species)) + 
+  scale_fill_manual(values = .co(c("red", "blue", "blue2"))) -
+  .gg_finalise
+```
+
+```{r}
+#| cap: "Minta táblázat"
 #| tbl-subcap: "Non cupidatat ut sint non est labore adipisicing aliqua labore consequat fugiat irure fugiat id. Amet exercitation pariatur proident incididunt velit id laborum anim ad duis mollit nisi enim eiusmod. Enim sint qui fugiat elit laborum mollit ipsum pariatur magna enim est. Incididunt nisi culpa est laborum in Lorem quis id sunt ad Lorem consequat."
 
 iris |> 
@@ -61,7 +60,8 @@ iris |>
   .gt_finalise()
 ```
 
+És egy minta hivatkozás [@ang2006does]. 
 
-És egy minta hivatkozás [@CameronTrivedi2013]. 
+Hivatkozás 3 szerzővel: [@cserhati2009]
 
 # Hivatkozott irodalom {.unnumbered}

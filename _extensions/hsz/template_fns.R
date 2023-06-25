@@ -25,6 +25,7 @@ library(gt)
 .gt_finalise <- function(.gt, ...) {
   
   subtitle <- knitr::opts_current$get()$`tbl-cap`
+  if (is.null(subtitle)) subtitle <- knitr::opts_current$get()$cap
   subcap <- knitr::opts_current$get()$`tbl-subcap`
   
   if (is.null(subtitle)) {
@@ -141,16 +142,16 @@ library(gt)
 
 # * HSZ theme
 # font from: https://www.rmtweb.co.uk/calibri-and-cambria-fonts-for-mac
-hsz_theme <- theme_classic(base_family = "Calibri", base_size = 10) + 
+hsz_theme <- theme_classic(base_family = "Calibri", base_size = 10.5) + 
   theme(
-    text = element_text(family = "Calibri", size = 0),
+    text = element_text(family = "Calibri", size = 10.5),
     plot.background = element_rect(fill = "#e4e4e3", color = "#e4e4e3"),
     panel.background = element_rect(fill = "#e4e4e3"),
     axis.ticks.length=unit(.15, "cm"),
     axis.ticks = element_line(linewidth = .8, color = "black"),
     legend.position = "bottom",
     legend.background = element_blank(),
-    plot.caption = element_text(size = 10, face = "italic", hjust = 0),
+    plot.caption = element_text(size = 10.5, face = "italic", hjust = 0),
     plot.caption.position = "plot",
     panel.grid.major.y = element_line(linetype = "dotted", color = "#969898"),
     axis.title = element_text(family = "Calibri", color = "black", size = 8),
@@ -190,7 +191,48 @@ update_geom_defaults("line", list(size = 1.1, color = .co("blue")))
 
 .gg_finalise <- function(plot_name = ggplot2::last_plot())  {
   
+  modify_y <- knitr::opts_current$get()$`modify_y`
+  subcap <- knitr::opts_current$get()$`fig.subcap` |> 
+    str_wrap(95) |> 
+    str_replace("Forrás:", "\nForrás:")
+  
+  if (is.null(modify_y) || modify_y) {
+    # move y-axis text to subtitle
+    gr <- ggplotGrob(plot_name)
+    
+    y_axis_title <- gr |> 
+      pluck("grobs") |> 
+      pluck(which(gr$layout$name == "ylab-l")) |> 
+      pluck("children") |> 
+      pluck(1) |> 
+      pluck("label")
+    
+    if (!is.null(subcap)) {
+      plot_name <- plot_name +
+        labs(
+          y = NULL,
+          subtitle = y_axis_title,
+          caption = subcap
+        )
+    } else {
+      plot_name <- plot_name +
+        labs(
+          y = NULL,
+          subtitle = y_axis_title
+        )
+    }
+  } else {
+    if (!is.null(subcap)) {
+      plot_name <- plot_name +
+        labs(
+          caption = subcap
+        )
+    }
+  }
+  
   title <- knitr::opts_current$get()$`fig.cap`
+  if (is.null(title)) title <- knitr::opts_current$get()$cap
+  
   w <- knitr::opts_current$get()$`fig.width`
   h <- knitr::opts_current$get()$`fig.height`
   

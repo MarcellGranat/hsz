@@ -15,7 +15,6 @@ contributes:
         fig-format: svg
         number-sections: true
         fig-width: 6
-        # Use a CSL file to style (https://www.zotero.org/styles/)
         reference-doc: custom-reference-doc.docx
         language:
           crossref-fig-title: ""
